@@ -1,6 +1,7 @@
 {% extends 'lmn/base.html' %}
 {% block content %}
 {% load mathfilters %}
+{% load social_share %}
 
 
 {% if show %}
@@ -29,6 +30,18 @@
     <p class='note-text'>{{ note.text|truncatechars:100 }}</p>
 
   </div>  
+
+  <button>
+    {% post_to_twitter "{{ note.text|truncatechars:100 }}" object_or_url "Twitter" %}
+  </button>
+
+  <button>
+    {% post_to_reddit "{{ note.text|truncatechars:100 }}" object_or_url "Reddit" %}
+  </button>
+
+  <button>
+    {% post_to_facebook object_or_url "Facebook" %}
+  </button>
 
   <hr>
 
