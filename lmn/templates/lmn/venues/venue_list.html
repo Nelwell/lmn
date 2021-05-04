@@ -1,6 +1,7 @@
 {% extends 'lmn/base.html' %}
 {% block content %}
 {% load mathfilters %}
+{% load social_share %}
 
 
 <h1>VENUES</h1>
@@ -32,6 +33,19 @@
       <p><a href="{% url 'venue_detail' venue_pk=venue.pk %}">{{ venue.name }}</a> {{ venue.city }}, {{ venue.state }}</p>
       <p>See artists, notes, and add your own <a href='{% url "artists_at_venue" venue_pk=venue.pk %}'>{{ venue.name }} notes</a></p>
     </div>
+
+    <button>
+      {% post_to_twitter "{{ venue.name }} @ {{ venue.city }}" object_or_url "Twitter" %}
+    </button>
+
+    <button>
+      {% post_to_reddit "{{ venue.name }} @ {{ venue.city }}" object_or_url "Reddit" %}
+    </button>
+
+    <button>
+      {% post_to_facebook object_or_url "Facebook" %}
+    </button>
+
 
     {% empty %}
       <p>No venues found</p>

@@ -17,3 +17,4 @@ sorl-thumbnail==12.7.0
 asgiref==3.3.1
 Django==3.1.7
 selenium==3.141.0
+django-social-share==2.2.1
