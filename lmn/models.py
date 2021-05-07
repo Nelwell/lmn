@@ -89,7 +89,7 @@ class Note(models.Model):
         if old_note and old_note.image:
             if old_note.image != self.image:
                 self.delete_image(old_note.image)
-
+       
         super().save(*args, **kwargs)
 
 
@@ -143,7 +143,7 @@ class Profile(models.Model):
         if self.profile_image:
             self.delete_image(self.profile_image)
 
-        super().delete(*args, **kwargs)
+        super().delete(*args, **kwargs)        
 
 
     def __str__(self):

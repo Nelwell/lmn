@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from ..models import Venue, Artist, Note, Show, Profile, ShowRating
 from ..forms import VenueSearchForm, NewNoteForm, ArtistSearchForm, UserRegistrationForm, NewShowRatingForm
 
+from django.db.models import Avg, Count, Min, Sum
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
@@ -75,6 +76,10 @@ def latest_notes(request):
                   'page_range': paginator.page_range, 'num_pages' : paginator.num_pages, 
                   'current_page': page})
 
+def most_notes(request):
+    shows = Show.objects.annotate(num_notes=Count('note')).order_by('-num_notes')[:10]
+    # top 10 shows with most notes
+    return render(request, 'lmn/notes/most_notes.html', {'shows': shows })  
 
 def note_detail(request, note_pk):
     note = get_object_or_404(Note, pk=note_pk)

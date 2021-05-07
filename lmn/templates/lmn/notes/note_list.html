@@ -2,8 +2,9 @@
 {% block content %}
 {% load mathfilters %}
 
-
 <h2>Latest Notes</h2>
+
+<a href="{% url 'most_notes' %}">Shows with most notes</a>
 
 <p> Page {{ current_page }} of {{ num_pages }}</p>
 
