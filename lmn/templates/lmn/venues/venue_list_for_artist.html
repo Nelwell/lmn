@@ -8,7 +8,20 @@
   <div class="show" id="show-{{ show.pk }}">
     <p>{{ show.venue.name}} on {{ show.show_date }}</p>
     <p><a href="{% url 'notes_for_show' show_pk=show.pk %}">See notes for this show and add your own</a></p>
+    <p>
+    <button class="share-button">
+      {% post_to_twitter "{{ note.text|truncatechars:100 }}" object_or_url "Twitter" %}
+    </button>
+      
+    <button class="share-button">
+      {% post_to_reddit "{{ note.text|truncatechars:100 }}" object_or_url "Reddit" %}
+    </button>
+      
+    <button class="share-button">
+      {% post_to_facebook object_or_url "Facebook" %}
+    </button>
   </div>
+  
 
 {% empty %}
   <P id="no-results">We have no records of venues this artist has played at<p>

@@ -1,6 +1,7 @@
 {% extends 'lmn/base.html' %}
 {% load static %}
 {% block content %}
+{% load social_share %}
 
 
 <h2 id="note-page-title">{{ note.show.artist.name }} at {{ note.show.venue.name }} by 
@@ -18,11 +19,22 @@
     <P>No image uploaded</p>
     {% endif %}
 
+<button class="share-button">
+    {% post_to_twitter "{{ note.text|truncatechars:100 }}" object_or_url "Twitter" %}
+</button>
+    
+<button class="share-button">
+    {% post_to_reddit "{{ note.text|truncatechars:100 }}" object_or_url "Reddit" %}
+</button>
+    
+<button class="share-button">
+    {% post_to_facebook object_or_url "Facebook" %}
+</button>
 
 {% if note.user.pk == user.pk %}
 
     <p>
-        <a class='edit' href="{% url 'edit_note' note_pk=note.pk %}">Edit</a>
+        <br><a class='edit' href="{% url 'edit_note' note_pk=note.pk %}">Edit</a>
     </p>
 
     <form action="{% url 'delete_note' note.pk %}" method="POST">

@@ -89,3 +89,11 @@ a {
 .success-message {
   color: rgb(36, 214, 36);
 }
+
+button {
+  outline: rgb(70, 193, 197);
+  background-color: black;
+  color: white;
+  position: relative;
+  margin-bottom: 2%;
+}

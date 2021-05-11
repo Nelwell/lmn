@@ -1,6 +1,7 @@
 {% extends 'lmn/base.html' %}
 {% block content %}
 {% load thumbnail %}
+{% load social_share %}
 
 
 <!-- A user's profile page.
@@ -77,6 +78,19 @@ user is a variable provided to the template and is the current logged-in user
   <p class="note_info">{{ note.show.artist.name }} at {{ note.show.venue.name }} on {{ note.show.show_date }}</p>
   <p class="note_text">{{ note.text|truncatechars:300 }}</p>
   <p class="note_posted_at">{{ note.posted_date }}</p>
+
+  <button class="share-button">
+    {% post_to_twitter "{{ note.text|truncatechars:100 }}" object_or_url "Twitter" %}
+  </button>
+    
+  <button class="share-button">
+    {% post_to_reddit "{{ note.text|truncatechars:100 }}" object_or_url "Reddit" %}
+  </button>
+    
+  <button class="share-button">
+    {% post_to_facebook object_or_url "Facebook" %}
+  </button>
+
 </div>
 
 {% empty %}

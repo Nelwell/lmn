@@ -32,15 +32,15 @@
     </p>  
   </div>
 
-  <button>
+  <button class="share-button">
     {% post_to_twitter "Checkout: {{ artist.name }}" object_or_url "Twitter" %}
   </button>
 
-  <button>
+  <button class="share-button">
     {% post_to_reddit "Checkout: {{ artist.name }}" object_or_url "Reddit" %}
   </button>
 
-  <button>
+  <button class="share-button">
     {% post_to_facebook object_or_url "Facebook" %}
   </button>
 

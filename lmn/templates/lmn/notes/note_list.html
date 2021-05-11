@@ -31,15 +31,15 @@
 
   </div>  
 
-  <button>
+  <button class="share-button">
     {% post_to_twitter "{{ note.text|truncatechars:100 }}" object_or_url "Twitter" %}
   </button>
 
-  <button>
+  <button class="share-button">
     {% post_to_reddit "{{ note.text|truncatechars:100 }}" object_or_url "Reddit" %}
   </button>
 
-  <button>
+  <button class="share-button">
     {% post_to_facebook object_or_url "Facebook" %}
   </button>
 
