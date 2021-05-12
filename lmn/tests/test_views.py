@@ -324,7 +324,7 @@ class TestAddNotesWhenUserLoggedIn(TestCase):
 
         initial_note_count = Note.objects.count()
 
-        new_note_url = reverse('new_note', kwargs={'show_pk':1})
+        new_note_url = reverse('new_note', kwargs={'show_pk':2})
 
         response = self.client.post(new_note_url, {'text':'ok', 'title':'blah blah' }, follow=True)
 
@@ -340,7 +340,7 @@ class TestAddNotesWhenUserLoggedIn(TestCase):
 
         initial_note_count = Note.objects.count()
 
-        new_note_url = reverse('new_note', kwargs={'show_pk':1})
+        new_note_url = reverse('new_note', kwargs={'show_pk':2})
         response = self.client.post(new_note_url, {'text':'ok', 'title':'blah blah' }, follow=True)
         new_note = Note.objects.filter(text='ok', title='blah blah').first()
 
@@ -892,6 +892,7 @@ class TestBadges(TestCase):
         
         self.assertEqual(user_badges, 1)
 
+        new_note_url = reverse('new_note', kwargs={'show_pk':2})
         response = self.client.post(new_note_url, {'text':'ok', 'title':'blah blah' }, follow=True)
         self.assertEqual(response.status_code, 200)
 
@@ -903,12 +904,15 @@ class TestBadges(TestCase):
 
 
     def test_add_note_number_shouldnt_get_badge_badge_not_applied(self):
-        new_note_url = reverse('new_note', kwargs={'show_pk':1})
+        
         # Add 3 notes, should only have 2 badges
+        new_note_url = reverse('new_note', kwargs={'show_pk':1})
         response = self.client.post(new_note_url, {'text':'ok', 'title':'blah blah' }, follow=True)
         self.assertEqual(response.status_code, 200)
+        new_note_url = reverse('new_note', kwargs={'show_pk':2})
         response = self.client.post(new_note_url, {'text':'ok', 'title':'blah blah' }, follow=True)
         self.assertEqual(response.status_code, 200)
+        new_note_url = reverse('new_note', kwargs={'show_pk':3})
         response = self.client.post(new_note_url, {'text':'ok', 'title':'blah blah' }, follow=True)
         self.assertEqual(response.status_code, 200)
 
